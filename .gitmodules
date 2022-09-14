@@ -1,0 +1,4 @@
+[submodule "client/Assets/Core"]
+	path = client/Assets/Core
+	url = git@github.com:esg-ssimpson/submodule_test.git
+	branch = main
