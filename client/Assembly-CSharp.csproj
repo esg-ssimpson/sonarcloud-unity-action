@@ -4,7 +4,7 @@
     <SonarQubeTestProject>false</SonarQubeTestProject>
   </PropertyGroup>
   <PropertyGroup>
-    <ReferencePath>C:\Program Files\Unity\Hub\Editor\$(UNITY_VERSION)\Editor\Data\Managed\UnityEngine;$(ReferencePath)</ReferencePath>
+    <ReferencePath>C:\Program Files\Unity\Hub\Editor\2018.4.36f1\Editor\Data\Managed\UnityEngine;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
