@@ -63,6 +63,8 @@ unitymerge.log
 /.sonarqube/
 /client/.sonarqube/
 /client/.scannerwork/
+/client/sonarproj/[Oo]bj
+/client/sonarproj/[Tt]emp
 
 # Git hooks files
 /client/client.sln.cache
