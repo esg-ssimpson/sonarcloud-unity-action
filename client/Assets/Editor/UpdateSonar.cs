@@ -87,43 +87,13 @@ namespace Editor
                         //     $"<ReferencePath>C:\\Program Files\\Unity\\Hub\\Editor\\{Application.unityVersion}\\Editor\\Data\\Managed;C:\\Program Files\\Unity\\Hub\\Editor\\{Application.unityVersion}\\Editor\\Data\\Managed\\UnityEngine;$(ReferencePath)</ReferencePath>");
                         // outputString.AppendLine("\t</PropertyGroup>");
                     }
+                    else if (readLine.Contains("<Compile Include=\""))
+                    {
+                        outputString.AppendLine(ProcessCompileInclude(readLine));
+                    }
                     else if (readLine.Contains("<HintPath>"))
                     {
-                        string pathString;
-                        string hintPath;
-                        int pathIndex;
-
-                        if (readLine.Contains("PlaybackEngines"))
-                        {
-                            // PlaybackEngines won't impact builds and can be left unmodified
-                            outputString.AppendLine(readLine);
-                        }
-                        else if (readLine.Contains("Unity/Hub/Editor"))
-                        {
-                            
-                            pathIndex = readLine.IndexOf("Editor/Data/");
-                            if (pathIndex > 0)
-                            {
-                                pathIndex += "Editor/Data/".Length;
-                            }
-                            else
-                            {
-                                pathIndex = readLine.IndexOf("Unity.app/Contents/") + "Unity.app/Contents/".Length;
-                            }
-
-                            pathString = readLine.Substring(pathIndex, readLine.Length - pathIndex);
-                            hintPath =
-                                $"\t\t\t<HintPath>C:/Program Files/Unity/Hub/Editor/{Application.unityVersion}/Editor/Data/{pathString}";
-                            outputString.AppendLine(hintPath);
-                        }
-                        else if (readLine.Contains(directoryPath))
-                        {
-                            pathIndex = readLine.IndexOf(directoryPath) + directoryPath.Length;
-                            Debug.Log($"Directory path: '{directoryPath}', path index: '{pathIndex}', line: '{readLine}'");
-                            pathString = readLine.Substring(pathIndex, readLine.Length - pathIndex);
-                            hintPath = $"\t\t\t<HintPath>{DockerPath}{directoryPath}{pathString}";
-                            outputString.AppendLine(hintPath);
-                        }
+                        outputString.AppendLine(ProcessHintPath(readLine, directoryPath));
                     }
                     else
                     {
@@ -141,6 +111,58 @@ namespace Editor
             {
                 File.WriteAllText(@"sonarproj/" + fileName, outputString.ToString());
             }
+        }
+
+        private static string ProcessCompileInclude(string readLine)
+        {
+            string compileInclude = "";
+            string pathString;
+            int pathIndex;
+
+            pathIndex = readLine.IndexOf("<Compile Include=\"") + "<Compile Include=\"".Length;
+            pathString = readLine.Substring(pathIndex, readLine.Length - pathIndex);
+            compileInclude = $"\t\t\t<Compile Include=\"..\\{pathString}";
+            
+            return compileInclude;
+        }
+
+        private static string ProcessHintPath(string readLine, string directoryPath)
+        {
+            string hintPath = "";
+            string pathString;
+            int pathIndex;
+
+            if (readLine.Contains("PlaybackEngines"))
+            {
+                // PlaybackEngines won't impact builds and can be left unmodified
+                hintPath = readLine;
+            }
+            else if (readLine.Contains("Unity/Hub/Editor"))
+            {
+                            
+                pathIndex = readLine.IndexOf("Editor/Data/");
+                if (pathIndex > 0)
+                {
+                    pathIndex += "Editor/Data/".Length;
+                }
+                else
+                {
+                    pathIndex = readLine.IndexOf("Unity.app/Contents/") + "Unity.app/Contents/".Length;
+                }
+
+                pathString = readLine.Substring(pathIndex, readLine.Length - pathIndex);
+                hintPath =
+                    $"\t\t\t<HintPath>C:/Program Files/Unity/Hub/Editor/{Application.unityVersion}/Editor/Data/{pathString}";
+            }
+            else if (readLine.Contains(directoryPath))
+            {
+                pathIndex = readLine.IndexOf(directoryPath) + directoryPath.Length;
+                Debug.Log($"Directory path: '{directoryPath}', path index: '{pathIndex}', line: '{readLine}'");
+                pathString = readLine.Substring(pathIndex, readLine.Length - pathIndex);
+                hintPath = $"\t\t\t<HintPath>{DockerPath}{directoryPath}{pathString}";
+            }
+
+            return hintPath;
         }
         
         private static void UpdateSolutionFile(FileInfo fileInfo)
