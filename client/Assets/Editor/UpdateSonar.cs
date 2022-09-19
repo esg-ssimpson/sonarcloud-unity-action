@@ -27,7 +27,7 @@ namespace Editor
             Debug.Log("Directory: " + directoryInfo.Name);
             var filesInfo = directoryInfo.GetFiles();
 
-            Directory.CreateDirectory("sonarproj");
+            //Directory.CreateDirectory("sonarproj");
 
             foreach (var fileInfo in filesInfo)
             {
@@ -35,7 +35,8 @@ namespace Editor
 
                 // We don't need to update any project files that are Editor projects,
                 // since they won't be built by MSBuild during analysis 
-                if (fileName.EndsWith(".csproj"))// && !fileName.Contains("Editor"))
+                //if (fileName.EndsWith(".csproj") && !fileName.Contains("Editor"))
+                if (fileName == "Assembly-CSharp.csproj")
                 {
                     UpdateProjectFile(fileInfo, directoryInfo.Name);
                 }
@@ -87,13 +88,17 @@ namespace Editor
                         //     $"<ReferencePath>C:\\Program Files\\Unity\\Hub\\Editor\\{Application.unityVersion}\\Editor\\Data\\Managed;C:\\Program Files\\Unity\\Hub\\Editor\\{Application.unityVersion}\\Editor\\Data\\Managed\\UnityEngine;$(ReferencePath)</ReferencePath>");
                         // outputString.AppendLine("\t</PropertyGroup>");
                     }
-                    else if (readLine.Contains("<Compile Include=\""))
-                    {
-                        outputString.AppendLine(ProcessCompileInclude(readLine));
-                    }
+                    // else if (readLine.Contains("<Compile Include=\""))
+                    // {
+                    //     outputString.AppendLine(ProcessCompileInclude(readLine));
+                    // }
                     else if (readLine.Contains("<HintPath>"))
                     {
                         outputString.AppendLine(ProcessHintPath(readLine, directoryPath));
+                    }
+                    else if (readLine.Contains("AssemblyName"))
+                    {
+                        outputString.AppendLine(readLine.Replace("Assembly-CSharp", "Assembly-Sonar"));
                     }
                     else
                     {
@@ -109,7 +114,8 @@ namespace Editor
             // otherwise we found duplicate ReferencePath values and do not need to update
             if (readLine == null)
             {
-                File.WriteAllText(@"sonarproj/" + fileName, outputString.ToString());
+                //File.WriteAllText(@"sonarproj/" + fileName, outputString.ToString());
+                File.WriteAllText("Assembly-Sonar.csproj", outputString.ToString());
             }
         }
 
@@ -157,7 +163,7 @@ namespace Editor
             else if (readLine.Contains(directoryPath))
             {
                 pathIndex = readLine.IndexOf(directoryPath) + directoryPath.Length;
-                Debug.Log($"Directory path: '{directoryPath}', path index: '{pathIndex}', line: '{readLine}'");
+                //Debug.Log($"Directory path: '{directoryPath}', path index: '{pathIndex}', line: '{readLine}'");
                 pathString = readLine.Substring(pathIndex, readLine.Length - pathIndex);
                 hintPath = $"\t\t\t<HintPath>{DockerPath}{directoryPath}{pathString}";
             }

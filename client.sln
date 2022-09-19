@@ -1,9 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "client/sonarproj/Assembly-CSharp.csproj", "{A2859A56-AB4A-51F9-60BB-1B6FC96E8C70}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "client/sonarproj/Assembly-CSharp-Editor.csproj", "{2FC59FCE-BCB1-13D3-FB79-5DD1AF79A2AF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-Sonar", "client/Assembly-Sonar.csproj", "{A2859A56-AB4A-51F9-60BB-1B6FC96E8C70}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
