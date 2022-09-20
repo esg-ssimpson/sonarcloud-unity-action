@@ -6,12 +6,9 @@ jobs:
     name: Build
     runs-on: windows-latest
     steps:
-      - name: Fix up git URLs
-        shell: powershell
-        run: echo "[url ""git@github.com:""] `n insteadOf = ""https://github.com/""" > .gitconfig
       - name: Checkout repository and submodules
         uses: actions/checkout@v2
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
           token: ${{ secrets.SUBMODULE_PULL }}
-          submodules: recursive
+          submodules: 'true'
