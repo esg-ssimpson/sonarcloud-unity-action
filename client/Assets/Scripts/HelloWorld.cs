@@ -8,9 +8,11 @@ public class HelloWorld : MonoBehaviour
     void Start()
     {
         Debug.Log("Behaviour Working. Time to take Monday off!");
+        Debug.Log("Submodule version: " + SubmoduleTest.SubmoduleVersion());
     }
 
     // Update is called once per frame
+    // This function is here to give SonarCloud something to complain about
     void Update()
     {
         

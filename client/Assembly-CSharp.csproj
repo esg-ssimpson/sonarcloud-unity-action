@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Core\SubmoduleTest.cs" />
     <Compile Include="Assets\Scripts\HelloWorld.cs" />
     <Reference Include="UnityEngine.Purchasing">
       <HintPath>/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Library/ScriptAssemblies/UnityEngine.Purchasing.dll</HintPath>
