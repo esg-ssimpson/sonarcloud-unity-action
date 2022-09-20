@@ -6,7 +6,7 @@ using System.Text;
 using UnityEditor;
 using UnityEngine;
 
-namespace Editor
+namespace EastSideGames.Utility
 {
     [InitializeOnLoad]
     public class UpdateSonar
