@@ -8,7 +8,7 @@ jobs:
     steps:
       - name: Fix up git URLs
         shell: powershell
-        run: echo "[url ""https://github.com/""] `n insteadOf = ""git@github.com:""" > .gitconfig
+        run: echo "[url ""git@github.com:""] `n insteadOf = ""https://github.com/""" > .gitconfig
       - name: Checkout repository and submodules
         uses: actions/checkout@v2
         with:
