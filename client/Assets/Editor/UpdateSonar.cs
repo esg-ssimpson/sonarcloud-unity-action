@@ -162,6 +162,17 @@ namespace EastSideGames.Utility
             }
             else if (readLine.Contains(directoryPath))
             {
+                // if the .dll is in the Library/PackageCache folder, copy it to the 
+                // ScriptAssemblies folder
+                if (readLine.Contains("PackageCache"))
+                {
+                    int fileIndex = readLine.IndexOf("<HintPath>") + "<HintPath>".Length;
+                    string filePath = readLine.Substring(fileIndex, readLine.Length - fileIndex - "</HintPath>".Length);
+                    fileIndex = filePath.LastIndexOf("/");
+                    string fileName = filePath.Substring(fileIndex, filePath.Length - fileIndex);
+                    File.Copy(filePath, "Library/ScriptAssemblies/" + fileName);
+                    readLine = directoryPath + "Library/ScriptAssemblies/" + fileName + "</HintPath>";
+                }
                 pathIndex = readLine.IndexOf(directoryPath) + directoryPath.Length;
                 //Debug.Log($"Directory path: '{directoryPath}', path index: '{pathIndex}', line: '{readLine}'");
                 pathString = readLine.Substring(pathIndex, readLine.Length - pathIndex);

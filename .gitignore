@@ -73,4 +73,3 @@ client/remote_config_data
 # Include Library folders with assemblies
 /client/[Ll]ibrary/*
 !/client/[Ll]ibrary/ScriptAssemblies
-#!/client/[Ll]ibrary/PackageCache
