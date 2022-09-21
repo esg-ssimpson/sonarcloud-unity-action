@@ -7,7 +7,8 @@ public class HelloWorld : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Behaviour Working. Time to take Monday off!");
+        // commenting out code to give SonarCloud something to complain about on the PR
+        //Debug.Log("Behaviour Working. Time to take Monday off!");
         Debug.Log("Submodule version: " + SubmoduleTest.SubmoduleVersion());
     }
 
