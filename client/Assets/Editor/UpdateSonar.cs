@@ -35,14 +35,14 @@ namespace EastSideGames.Utility
 
                 // We don't need to update any project files that are Editor projects,
                 // since they won't be built by MSBuild during analysis 
-                //if (fileName.EndsWith(".csproj") && !fileName.Contains("Editor"))
-                if (fileName == "Assembly-CSharp.csproj")
+                if (fileName.EndsWith(".csproj") && !fileName.Contains("-Sonar"))// && !fileName.Contains("Editor"))
+                //if (fileName == "Assembly-CSharp.csproj")
                 {
                     UpdateProjectFile(fileInfo, directoryInfo.Name);
                 }
                 else if (fileName.EndsWith(".sln"))
                 {
-                    //ToDo
+                    UpdateSolutionFile(fileInfo, directoryInfo.Name);
                 }
             }
         }
@@ -76,13 +76,14 @@ namespace EastSideGames.Utility
                         
                         // Only the Assembly-CSharp needs to be marked as not a test project
                         // All other projects can be safely ignored during analysis
-                        if (fileName == "Assembly-CSharp.csproj")
-                        {
+                        //if (fileName == "Assembly-CSharp.csproj")
+                        //{
                             outputString.AppendLine("\t<PropertyGroup>");
                             outputString.AppendLine("\t\t<SonarQubeTestProject>false</SonarQubeTestProject>");
                             outputString.AppendLine("\t</PropertyGroup>");
-                        }
-                           
+                        //}
+                          
+                        // ReferencePath did not work out for this!
                         // outputString.AppendLine("\t<PropertyGroup>");
                         // outputString.AppendLine(
                         //     $"<ReferencePath>C:\\Program Files\\Unity\\Hub\\Editor\\{Application.unityVersion}\\Editor\\Data\\Managed;C:\\Program Files\\Unity\\Hub\\Editor\\{Application.unityVersion}\\Editor\\Data\\Managed\\UnityEngine;$(ReferencePath)</ReferencePath>");
@@ -96,9 +97,15 @@ namespace EastSideGames.Utility
                     {
                         outputString.AppendLine(ProcessHintPath(readLine, directoryPath));
                     }
+                    else if (readLine.Contains(".csproj"))
+                    {
+                        // Project references need to be edited to include -Sonar
+                        outputString.AppendLine(readLine.Replace(".csproj", "-Sonar.csproj"));
+                    }
                     else if (readLine.Contains("AssemblyName"))
                     {
-                        outputString.AppendLine(readLine.Replace("Assembly-CSharp", "Assembly-Sonar"));
+                        // Assemblies need to be renamed to add -Sonar
+                        outputString.AppendLine(readLine.Replace("</AssemblyName>", "-Sonar</AssemblyName>"));
                     }
                     else
                     {
@@ -110,13 +117,7 @@ namespace EastSideGames.Utility
             streamReader.Close();
             streamReader.Dispose();
 
-            // We should only overwrite the file with the new contents if readLine is null,
-            // otherwise we found duplicate ReferencePath values and do not need to update
-            if (readLine == null)
-            {
-                //File.WriteAllText(@"sonarproj/" + fileName, outputString.ToString());
-                File.WriteAllText("Assembly-Sonar.csproj", outputString.ToString());
-            }
+            File.WriteAllText(fileName.Replace(".csproj", "-Sonar.csproj"), outputString.ToString());
         }
 
         private static string ProcessCompileInclude(string readLine)
@@ -170,7 +171,7 @@ namespace EastSideGames.Utility
                     string filePath = readLine.Substring(fileIndex, readLine.Length - fileIndex - "</HintPath>".Length);
                     fileIndex = filePath.LastIndexOf("/");
                     string fileName = filePath.Substring(fileIndex, filePath.Length - fileIndex);
-                    File.Copy(filePath, "Library/ScriptAssemblies/" + fileName);
+                    File.Copy(filePath, "Library/ScriptAssemblies" + fileName, true);
                     readLine = directoryPath + "Library/ScriptAssemblies/" + fileName + "</HintPath>";
                 }
                 pathIndex = readLine.IndexOf(directoryPath) + directoryPath.Length;
@@ -182,12 +183,11 @@ namespace EastSideGames.Utility
             return hintPath;
         }
         
-        private static void UpdateSolutionFile(FileInfo fileInfo)
+        private static void UpdateSolutionFile(FileInfo fileInfo, string directoryName)
         {
             string fileName = fileInfo.Name;
-            var newFile = fileInfo.CopyTo("../" + fileName);
             Debug.Log($"[UpdateSonar::UpdateProjectFile] Updating solution '{fileName}'");
-            StreamReader streamReader = newFile.OpenText();
+            StreamReader streamReader = fileInfo.OpenText();
             
             string readLine;
             StringBuilder outputString = new StringBuilder();
@@ -198,17 +198,26 @@ namespace EastSideGames.Utility
 
                 if (readLine != null)
                 {
-                    outputString.AppendLine(readLine);
-
-                    if (readLine.Contains("<ReferencePath>"))
+                    if (readLine.Contains(".csproj"))
                     {
-                        Debug.Log("[UpdateSonar::UpdateProjectFile] Project file already up-to-date, skipping");
-                        break;
+                        readLine = readLine.Replace(".csproj", "-Sonar.csproj");
                     }
-                    
-                    if (readLine.Contains("DUMMY"))
+
+                    if (readLine.StartsWith("Project("))
                     {
-                        
+                        //Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{A2859A56-AB4A-51F9-60BB-1B6FC96E8C70}"
+                        Debug.Log($"Processing project : '{readLine}'" );
+                        int assemblyIndex = readLine.IndexOf(@" = """) + @" = """.Length;
+                        Debug.Log(assemblyIndex);
+                        int assemblyEnd = readLine.IndexOf(@"""", assemblyIndex);
+                        readLine = readLine.Insert(assemblyEnd, "-Sonar");
+                        int pathIndex = readLine.IndexOf(@", """, assemblyEnd) + @", """.Length;
+                        readLine = readLine.Insert(pathIndex, directoryName + "/");
+                        outputString.AppendLine(readLine);
+                    }
+                    else
+                    {
+                        outputString.AppendLine(readLine);
                     }
                 }
             } while (readLine != null);
@@ -216,12 +225,7 @@ namespace EastSideGames.Utility
             streamReader.Close();
             streamReader.Dispose();
 
-            // We should only overwrite the file with the new contents if readLine is null,
-            // otherwise we found duplicate ReferencePath values and do not need to update
-            if (readLine == null)
-            {
-                File.WriteAllText("../" + fileName, outputString.ToString());
-            }
+            File.WriteAllText("../" + fileName, outputString.ToString());
         }
     }
 }
