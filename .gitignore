@@ -1,5 +1,6 @@
 # Unity3D generated folders
 /client/[Tt]emp/
+/client/[Ll]ibrary/
 /client/[Oo]bj/
 /client/[Bb]uild/
 /client/Assets/StreamingAssets
@@ -62,14 +63,10 @@ unitymerge.log
 /.sonarqube/
 /client/.sonarqube/
 /client/.scannerwork/
-/client/sonarproj/[Oo]bj
-/client/sonarproj/[Tt]emp
 
 # Git hooks files
 /client/client.sln.cache
 /msbuild.log
 client/remote_config_data
 
-# Include Library folders with assemblies
-/client/[Ll]ibrary/*
-!/client/[Ll]ibrary/ScriptAssemblies
+

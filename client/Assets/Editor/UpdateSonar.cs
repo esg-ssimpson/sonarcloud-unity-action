@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
-using System.Linq;
 using System.Text;
 using UnityEditor;
 using UnityEngine;
@@ -9,14 +7,13 @@ using UnityEngine;
 namespace EastSideGames.Utility
 {
     [InitializeOnLoad]
-    public class UpdateSonar
+    public static class UpdateSonar
     {
-        //private const string DockerPath = @"D:/a/trailerparkboys/trailerparkboys";
+        //DockerPath must be D:/a/<repo name>/<repo name>
         private const string DockerPath = @"D:/a/sonarcloud-unity-action/sonarcloud-unity-action";
         
         static UpdateSonar()
         {
-            Debug.Log("Executed editor script... Unity editor version: " + Application.unityVersion);
             EditorApplication.projectChanged += OnProjectChanged;
             OnProjectChanged();
         }
@@ -24,19 +21,15 @@ namespace EastSideGames.Utility
         private static void OnProjectChanged()
         {
             DirectoryInfo directoryInfo = new DirectoryInfo(".");
-            Debug.Log("Directory: " + directoryInfo.Name);
             var filesInfo = directoryInfo.GetFiles();
 
-            //Directory.CreateDirectory("sonarproj");
+            Directory.CreateDirectory("SonarAssemblies");
 
             foreach (var fileInfo in filesInfo)
             {
                 string fileName = fileInfo.Name;
-
-                // We don't need to update any project files that are Editor projects,
-                // since they won't be built by MSBuild during analysis 
-                if (fileName.EndsWith(".csproj") && !fileName.Contains("-Sonar"))// && !fileName.Contains("Editor"))
-                //if (fileName == "Assembly-CSharp.csproj")
+                
+                if (fileName.EndsWith(".csproj") && !fileName.Contains("-Sonar"))
                 {
                     UpdateProjectFile(fileInfo, directoryInfo.Name);
                 }
@@ -51,11 +44,9 @@ namespace EastSideGames.Utility
         {
             string fileName = fileInfo.Name;
             string directoryPath = $"/{directoryName}/";
-            
-            Debug.Log($"[UpdateSonar::UpdateProjectFile] Updating project '{fileName}'");
-            StreamReader streamReader = fileInfo.OpenText();
-            
             string readLine;
+            
+            StreamReader streamReader = fileInfo.OpenText();
             StringBuilder outputString = new StringBuilder();
        
             do
@@ -66,45 +57,29 @@ namespace EastSideGames.Utility
                 {
                     if (readLine.Contains("<SonarQubeTestProject>"))
                     {
-                        Debug.Log("[UpdateSonar::UpdateProjectFile] Project file already up-to-date, skipping");
                         break;
                     }
                     
-                    if (readLine.Contains("<Project "))
+                    if (readLine.StartsWith("<Project "))
                     {
+                        // Without this property, Sonar will only analyze the emitted code
+                        // with the Roslyn ruleset, which is only appropriate for test projects
+                        // and will produce unusable results.
                         outputString.AppendLine(readLine);
-                        
-                        // Only the Assembly-CSharp needs to be marked as not a test project
-                        // All other projects can be safely ignored during analysis
-                        //if (fileName == "Assembly-CSharp.csproj")
-                        //{
-                            outputString.AppendLine("\t<PropertyGroup>");
-                            outputString.AppendLine("\t\t<SonarQubeTestProject>false</SonarQubeTestProject>");
-                            outputString.AppendLine("\t</PropertyGroup>");
-                        //}
-                          
-                        // ReferencePath did not work out for this!
-                        // outputString.AppendLine("\t<PropertyGroup>");
-                        // outputString.AppendLine(
-                        //     $"<ReferencePath>C:\\Program Files\\Unity\\Hub\\Editor\\{Application.unityVersion}\\Editor\\Data\\Managed;C:\\Program Files\\Unity\\Hub\\Editor\\{Application.unityVersion}\\Editor\\Data\\Managed\\UnityEngine;$(ReferencePath)</ReferencePath>");
-                        // outputString.AppendLine("\t</PropertyGroup>");
+                        outputString.AppendLine("\t<PropertyGroup>");
+                        outputString.AppendLine("\t\t<SonarQubeTestProject>false</SonarQubeTestProject>");
+                        outputString.AppendLine("\t</PropertyGroup>");
                     }
-                    // else if (readLine.Contains("<Compile Include=\""))
-                    // {
-                    //     outputString.AppendLine(ProcessCompileInclude(readLine));
-                    // }
                     else if (readLine.Contains("<HintPath>"))
                     {
-                        outputString.AppendLine(ProcessHintPath(readLine, directoryPath));
+                        outputString.AppendLine(FixHintPath(readLine, directoryPath));
                     }
                     else if (readLine.Contains(".csproj"))
                     {
-                        // Project references need to be edited to include -Sonar
                         outputString.AppendLine(readLine.Replace(".csproj", "-Sonar.csproj"));
                     }
                     else if (readLine.Contains("AssemblyName"))
                     {
-                        // Assemblies need to be renamed to add -Sonar
                         outputString.AppendLine(readLine.Replace("</AssemblyName>", "-Sonar</AssemblyName>"));
                     }
                     else
@@ -120,20 +95,7 @@ namespace EastSideGames.Utility
             File.WriteAllText(fileName.Replace(".csproj", "-Sonar.csproj"), outputString.ToString());
         }
 
-        private static string ProcessCompileInclude(string readLine)
-        {
-            string compileInclude = "";
-            string pathString;
-            int pathIndex;
-
-            pathIndex = readLine.IndexOf("<Compile Include=\"") + "<Compile Include=\"".Length;
-            pathString = readLine.Substring(pathIndex, readLine.Length - pathIndex);
-            compileInclude = $"\t\t\t<Compile Include=\"..\\{pathString}";
-            
-            return compileInclude;
-        }
-
-        private static string ProcessHintPath(string readLine, string directoryPath)
+        private static string FixHintPath(string readLine, string directoryPath)
         {
             string hintPath = "";
             string pathString;
@@ -147,14 +109,14 @@ namespace EastSideGames.Utility
             else if (readLine.Contains("Unity/Hub/Editor"))
             {
                             
-                pathIndex = readLine.IndexOf("Editor/Data/");
+                pathIndex = readLine.IndexOf("Editor/Data/", StringComparison.CurrentCulture);
                 if (pathIndex > 0)
                 {
                     pathIndex += "Editor/Data/".Length;
                 }
                 else
                 {
-                    pathIndex = readLine.IndexOf("Unity.app/Contents/") + "Unity.app/Contents/".Length;
+                    pathIndex = readLine.IndexOf("Unity.app/Contents/", StringComparison.CurrentCulture) + "Unity.app/Contents/".Length;
                 }
 
                 pathString = readLine.Substring(pathIndex, readLine.Length - pathIndex);
@@ -163,19 +125,18 @@ namespace EastSideGames.Utility
             }
             else if (readLine.Contains(directoryPath))
             {
-                // if the .dll is in the Library/PackageCache folder, copy it to the 
-                // ScriptAssemblies folder
-                if (readLine.Contains("PackageCache"))
+                // if the .dll is in the Library/PackageCache or Library/ScriptAssemblies
+                // folder, copy it to the SonarAssemblies folder
+                if (readLine.Contains("PackageCache") || readLine.Contains("ScriptAssemblies"))
                 {
-                    int fileIndex = readLine.IndexOf("<HintPath>") + "<HintPath>".Length;
+                    int fileIndex = readLine.IndexOf("<HintPath>", StringComparison.CurrentCulture) + "<HintPath>".Length;
                     string filePath = readLine.Substring(fileIndex, readLine.Length - fileIndex - "</HintPath>".Length);
-                    fileIndex = filePath.LastIndexOf("/");
+                    fileIndex = filePath.LastIndexOf("/", StringComparison.CurrentCulture);
                     string fileName = filePath.Substring(fileIndex, filePath.Length - fileIndex);
-                    File.Copy(filePath, "Library/ScriptAssemblies" + fileName, true);
-                    readLine = directoryPath + "Library/ScriptAssemblies/" + fileName + "</HintPath>";
+                    File.Copy(filePath, "SonarAssemblies" + fileName, true);
+                    readLine = directoryPath + "SonarAssemblies/" + fileName + "</HintPath>";
                 }
-                pathIndex = readLine.IndexOf(directoryPath) + directoryPath.Length;
-                //Debug.Log($"Directory path: '{directoryPath}', path index: '{pathIndex}', line: '{readLine}'");
+                pathIndex = readLine.IndexOf(directoryPath, StringComparison.CurrentCulture) + directoryPath.Length;
                 pathString = readLine.Substring(pathIndex, readLine.Length - pathIndex);
                 hintPath = $"\t\t\t<HintPath>{DockerPath}{directoryPath}{pathString}";
             }
@@ -186,7 +147,6 @@ namespace EastSideGames.Utility
         private static void UpdateSolutionFile(FileInfo fileInfo, string directoryName)
         {
             string fileName = fileInfo.Name;
-            Debug.Log($"[UpdateSonar::UpdateProjectFile] Updating solution '{fileName}'");
             StreamReader streamReader = fileInfo.OpenText();
             
             string readLine;
@@ -205,13 +165,10 @@ namespace EastSideGames.Utility
 
                     if (readLine.StartsWith("Project("))
                     {
-                        //Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{A2859A56-AB4A-51F9-60BB-1B6FC96E8C70}"
-                        Debug.Log($"Processing project : '{readLine}'" );
-                        int assemblyIndex = readLine.IndexOf(@" = """) + @" = """.Length;
-                        Debug.Log(assemblyIndex);
-                        int assemblyEnd = readLine.IndexOf(@"""", assemblyIndex);
+                        int assemblyIndex = readLine.IndexOf(@" = """, StringComparison.CurrentCulture) + @" = """.Length;
+                        int assemblyEnd = readLine.IndexOf(@"""", assemblyIndex, StringComparison.CurrentCulture);
                         readLine = readLine.Insert(assemblyEnd, "-Sonar");
-                        int pathIndex = readLine.IndexOf(@", """, assemblyEnd) + @", """.Length;
+                        int pathIndex = readLine.IndexOf(@", """, assemblyEnd, StringComparison.CurrentCulture) + @", """.Length;
                         readLine = readLine.Insert(pathIndex, directoryName + "/");
                         outputString.AppendLine(readLine);
                     }
