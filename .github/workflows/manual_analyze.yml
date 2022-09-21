@@ -47,6 +47,6 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"esg-ssimpson_sonarcloud-unity-action" /o:"esg-ssimpson" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.projectBaseDir="D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client"
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"esg-ssimpson_sonarcloud-unity-action" /o:"esg-ssimpson" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           msbuild /target:Rebuild client.sln 
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
