@@ -10,11 +10,4 @@ public class HelloWorld : MonoBehaviour
         // removed commented code
         Debug.Log("Submodule version: " + SubmoduleTest.SubmoduleVersion());
     }
-
-    // Update is called once per frame
-    // This function is here to give SonarCloud something to complain about
-    void Update()
-    {
-        
-    }
 }
