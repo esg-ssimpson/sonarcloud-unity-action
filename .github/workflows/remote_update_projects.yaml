@@ -8,7 +8,7 @@ jobs:
     steps:
       - name: Setup env
         run: |
-          echo "project-folder=\client" >> $GITHUB_ENV
+          echo "project-folder=\\client" >> $GITHUB_ENV
           echo "solution-name=client" >> $GITHUB_ENV
           echo "project-key=esg-ssimpson_sonarcloud-unity-action" >> $GITHUB_ENV
           echo "organization=esg-ssimpson" >> $GITHUB_ENV
