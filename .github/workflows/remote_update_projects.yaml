@@ -1,4 +1,9 @@
 name: Remote Update Projects
+env:
+  PROJECT_FOLDER: \client
+  SOLUTION_NAME: client
+  PROJECT_KEY: esg-ssimpson_sonarcloud-unity-action
+  ORGANIZATION: esg-ssimpson
 on:
   workflow_dispatch:
 jobs:
@@ -6,12 +11,6 @@ jobs:
     name: Build
     runs-on: windows-latest
     steps:
-      - name: Setup env
-        run: |
-          echo "project-folder=\\client" >> $GITHUB_ENV
-          echo "solution-name=client" >> $GITHUB_ENV
-          echo "project-key=esg-ssimpson_sonarcloud-unity-action" >> $GITHUB_ENV
-          echo "organization=esg-ssimpson" >> $GITHUB_ENV
       - name: Set up JDK 11
         uses: actions/setup-java@v1
         with:
@@ -26,7 +25,7 @@ jobs:
         id: setup-unity
         uses: kuler90/setup-unity@v1
         with:
-          project-path: ${{ github.workspace }}${{ env.project-folder }}
+          project-path: ${{ github.workspace }}${{ env.PROJECT_FOLDER }}
       - name: Activate Unity
         uses: kuler90/activate-unity@v1
         with:
@@ -36,11 +35,11 @@ jobs:
       - name: Generate solution and project files
         shell: cmd
         run: |
-          "${{ env.UNITY_PATH }}" -batchmode -nographics -logFile - -executeMethod UnityEditor.SyncVS.SyncSolution -projectPath ${{ github.workspace }}${{ env.project-folder }} -quit
+          "${{ env.UNITY_PATH }}" -batchmode -nographics -logFile - -executeMethod UnityEditor.SyncVS.SyncSolution -projectPath ${{ github.workspace }}${{ env.PROJECT_FOLDER }} -quit
       - name: Update project files
         shell: cmd
         run: |
-          "${{ env.UNITY_PATH }}" -batchmode -nographics -logFile - -executeMethod EastSideGames.ThirdParty.SonarCloud.UpdateProjects.Update -projectPath ${{ github.workspace }}${{ env.project-folder }} -quit
+          "${{ env.UNITY_PATH }}" -batchmode -nographics -logFile - -executeMethod EastSideGames.ThirdParty.SonarCloud.UpdateProjects.Update -projectPath ${{ github.workspace }}${{ env.PROJECT_FOLDER }} -quit
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1.0.2
       - name: Cache SonarCloud packages
@@ -53,22 +52,22 @@ jobs:
         id: cache-sonar-scanner
         uses: actions/cache@v1
         with:
-          path: .${{ env.project-folder }}\.sonar\scanner
+          path: .${{ env.PROJECT_FOLDER }}\.sonar\scanner
           key: ${{ runner.os }}-sonar-scanner
           restore-keys: ${{ runner.os }}-sonar-scanner
       - name: Install SonarCloud scanner
         if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
         shell: powershell
         run: |
-          New-Item -Path .\client\.sonar\scanner -ItemType Directory
-          dotnet tool update dotnet-sonarscanner --tool-path .${{ env.project-folder }}\.sonar\scanner
+          New-Item -Path .${{ env.PROJECT_FOLDER }}\.sonar\scanner -ItemType Directory
+          dotnet tool update dotnet-sonarscanner --tool-path .${{ env.PROJECT_FOLDER }}\.sonar\scanner
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-          cd .${{ env.project-folder }}
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"${{ env.project-key }}" /o:"${{ env.organization }}" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          msbuild /target:Rebuild ${{ env.solution-name }}.sln 
+          cd .${{ env.PROJECT_FOLDER }}
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"${{ env.PROJECT_KEY }}" /o:"${{ env.ORGANIZATION }}" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+          msbuild /target:Rebuild ${{ env.SOLUTION_NAME }}.sln 
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
