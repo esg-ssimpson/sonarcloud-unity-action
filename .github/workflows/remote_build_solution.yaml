@@ -21,7 +21,11 @@ jobs:
         uses: kuler90/setup-unity@v1
         with:
           project-path: ${{ github.workspace }}\client
-          unity-modules: android
+      - name: Activate Unity
+        uses: kuler90/activate-unity@v1
+        with:
+          unity-username: ${{ secrets.UNITY_USERNAME }}
+          unity-password: ${{ secrets.UNITY_PASSWORD }}
       - name: Generate solution
         shell: cmd
         run: |
