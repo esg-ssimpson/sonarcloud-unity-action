@@ -25,7 +25,7 @@ jobs:
       - name: Generate solution
         shell: powershell
         run: |
-          "${{ env.UNITY-PATH }}" -batchmode -nographics -logFile - -executeMethod UnityEditor.SyncVS.SyncSolution -projectPath ${{ github.workspace }}\client -quit
+          "${{ env.UNITY_PATH }}" -batchmode -nographics -logFile - -executeMethod UnityEditor.SyncVS.SyncSolution -projectPath ${{ github.workspace }}\client -quit
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1.0.2
       - name: Cache SonarCloud packages
