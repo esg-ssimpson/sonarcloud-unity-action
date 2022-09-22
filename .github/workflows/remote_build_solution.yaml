@@ -17,14 +17,15 @@ jobs:
           token: ${{ secrets.SUBMODULE_PULL }}
           submodules: 'true'
       - name: Setup Unity
+        id: setup-unity
         uses: kuler90/setup-unity@v1
         with:
           project-path: ${{ github.workspace }}\client
           unity-modules: android
-      - name: Generate solution and project files
+      - name: Generate solution
         shell: powershell
         run: |
-          ${{ env.UNITY_PATH }}\Unity.exe -batchmode -nographics -logFile - -executeMethod UnityEditor.SyncVS.SyncSolution -projectPath ${{ github.workspace }}\client -quit
+          "${{ env.UNITY-PATH }}" -batchmode -nographics -logFile - -executeMethod UnityEditor.SyncVS.SyncSolution -projectPath ${{ github.workspace }}\client -quit
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1.0.2
       - name: Cache SonarCloud packages
