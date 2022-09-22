@@ -23,7 +23,7 @@ jobs:
           project-path: ${{ github.workspace }}\client
           unity-modules: android
       - name: Generate solution
-        shell: powershell
+        shell: cmd
         run: |
           "${{ env.UNITY_PATH }}" -batchmode -nographics -logFile - -executeMethod UnityEditor.SyncVS.SyncSolution -projectPath ${{ github.workspace }}\client -quit
       - name: Add msbuild to PATH
