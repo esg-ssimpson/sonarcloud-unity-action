@@ -25,7 +25,7 @@ jobs:
       - name: Setup Unity
         uses: kuler90/setup-unity@v1
         with:
-          project-path: ${{ github.workspace }}\client
+          project-path: ${{ github.workspace }}\${{ env.SOLUTION_NAME }}
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1.0.2
       - name: Cache SonarCloud packages
