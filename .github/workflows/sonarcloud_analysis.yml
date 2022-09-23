@@ -1,5 +1,11 @@
-name: Analyze Manually
+name: SonarCloud Analysis
+env:
+  SOLUTION_NAME: client
+  PROJECT_KEY: esg-ssimpson_sonarcloud-unity-action
+  ORGANIZATION: esg-ssimpson
 on:
+  pull_request:
+    types: [opened, synchronize]
   workflow_dispatch:
 jobs:
   build:
@@ -19,8 +25,7 @@ jobs:
       - name: Setup Unity
         uses: kuler90/setup-unity@v1
         with:
-          project-path: ${{ github.workspace }}\client
-          unity-modules: android
+          project-path: ${{ github.workspace }}\${{ env.SOLUTION_NAME }}
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1.0.2
       - name: Cache SonarCloud packages
@@ -48,6 +53,6 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"esg-ssimpson_sonarcloud-unity-action" /o:"esg-ssimpson" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          msbuild /target:Rebuild client.sln 
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"${{ env.PROJECT_KEY }}" /o:"${{ env.ORGANIZATION }}" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+          msbuild /target:Rebuild ${{ env.SOLUTION_NAME }}.sln 
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
