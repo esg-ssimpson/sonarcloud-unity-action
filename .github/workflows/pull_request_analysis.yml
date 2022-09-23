@@ -1,4 +1,8 @@
 name: PR Analysis
+env:
+  SOLUTION_NAME: client
+  PROJECT_KEY: esg-ssimpson_sonarcloud-unity-action
+  ORGANIZATION: esg-ssimpson
 on:
   pull_request:
     types: [opened, synchronize]
@@ -11,7 +15,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.11
-      - uses: actions/checkout@v2
+      - name: Checkout repository and submodules
+        uses: actions/checkout@v2
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
           token: ${{ secrets.SUBMODULE_PULL }}
@@ -48,6 +53,6 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"esg-ssimpson_sonarcloud-unity-action" /o:"esg-ssimpson" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.projectBaseDir="D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client"
-          msbuild /target:Rebuild client.sln 
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"${{ env.PROJECT_KEY }}" /o:"${{ env.ORGANIZATION }}" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+          msbuild /target:Rebuild ${{ env.SOLUTION_NAME }}.sln 
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
