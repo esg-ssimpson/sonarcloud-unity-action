@@ -26,7 +26,6 @@ jobs:
         uses: kuler90/setup-unity@v1
         with:
           project-path: ${{ github.workspace }}\client
-          unity-modules: android
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1.0.2
       - name: Cache SonarCloud packages
