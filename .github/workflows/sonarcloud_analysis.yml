@@ -22,6 +22,17 @@ jobs:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
           token: ${{ secrets.SUBMODULE_PULL }}
           submodules: 'true'
+      - name: Check for solution file
+        id: check_files
+        uses: andstor/file-existence-action@v1
+        with:
+          files: "${{ github.workspace }}/${{ env.SOLUTION_NAME }}.sln"
+      - name: Solution file missing
+        if: steps.check_files.outputs.files_exists != 'true'
+        uses: actions/github-script@v3
+        with:
+          script: |
+            core.setFailed('Solution file is missing!')
       - name: Setup Unity
         uses: kuler90/setup-unity@v1
         with:
