@@ -5,10 +5,11 @@ env:
   ORGANIZATION: esg-ssimpson
 on:
   pull_request:
-    types: [opened, synchronize]
+    types: [opened, labeled, synchronize]
   workflow_dispatch:
 jobs:
   build:
+    if: contains(github.event.pull_request.labels.*.name, 'scan')
     name: Build
     runs-on: windows-latest
     steps:
