@@ -9,7 +9,7 @@ on:
   workflow-dispatch:
 jobs:
   build:
-    if: github.event_name == 'workflow-dispatch' || contains(github.event.pull_request.labels.*.name, 'scan')
+    if: github.event_name == workflow-dispatch || contains(github.event.pull_request.labels.*.name, 'scan')
     name: Build
     runs-on: windows-latest
     steps:
