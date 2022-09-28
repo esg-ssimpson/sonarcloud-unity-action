@@ -1,4 +1,4 @@
-name: SonarCloud PR Analysis
+name: SonarCloud Analysis
 env:
   SOLUTION_NAME: client
   PROJECT_KEY: esg-ssimpson_sonarcloud-unity-action
@@ -28,7 +28,7 @@ jobs:
         uses: andstor/file-existence-action@v1
         with:
           files: "${{ github.workspace }}/${{ env.SOLUTION_NAME }}.sln"
-      - name: Solution file missing
+      - name: Fail build if solution file missing
         if: steps.check_files.outputs.files_exists != 'true'
         uses: actions/github-script@v3
         with:
