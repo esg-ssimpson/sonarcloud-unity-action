@@ -10,5 +10,6 @@ public class HelloWorld : MonoBehaviour
         // removed commented code
         Debug.Log("Submodule version: " + SubmoduleTest.SubmoduleVersion());
         Debug.Log("Adding some code to merge");
+        Debug.Log("So what happens now?");
     }
 }
