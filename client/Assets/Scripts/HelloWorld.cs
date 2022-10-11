@@ -2,13 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HelloWorld : MonoBehaviour
+namespace EastSideGames.Game
 {
-    // Start is called before the first frame update
-    void Start()
+    public class HelloWorld : MonoBehaviour
     {
-        Debug.Log("Submodule version: " + SubmoduleTest.SubmoduleVersion());
-        Debug.Log("This feature is awesome!");
-        //Debug.Log("I didn't need this code though");        
+        // Start is called before the first frame update
+        void Start()
+        {
+            Debug.Log("Submodule version: " + SubmoduleTest.SubmoduleVersion());
+            Debug.Log("This feature is awesome!");
+        }
+
+        public static string TestTest()
+        {
+            // making a change
+            return "Yes";
+        }
     }
 }
+

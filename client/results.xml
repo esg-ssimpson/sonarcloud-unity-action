@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Passed" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2022-10-06 13:38:30Z" end-time="2022-10-06 13:38:30Z" duration="0.1160143">
+  <test-suite type="TestSuite" id="1007" name="client" fullname="client" runstate="Runnable" testcasecount="1" result="Passed" start-time="2022-10-06 13:38:30Z" end-time="2022-10-06 13:38:30Z" duration="0.116014" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties />
+    <test-suite type="Assembly" id="1010" name="Assembly-CSharp-Editor.dll" fullname="/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Library/ScriptAssemblies/Assembly-CSharp-Editor.dll" runstate="Runnable" testcasecount="1" result="Passed" start-time="2022-10-06 13:38:30Z" end-time="2022-10-06 13:38:30Z" duration="0.073433" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="1412" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+      </properties>
+      <test-suite type="TestFixture" id="1008" name="NewTestScript" fullname="NewTestScript" classname="NewTestScript" runstate="Runnable" testcasecount="1" result="Passed" start-time="2022-10-06 13:38:30Z" end-time="2022-10-06 13:38:30Z" duration="0.068474" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1009" name="NewTestScriptSimplePasses" fullname="NewTestScript.NewTestScriptSimplePasses" methodname="NewTestScriptSimplePasses" classname="NewTestScript" runstate="Runnable" seed="1240486834" result="Passed" start-time="2022-10-06 13:38:30Z" end-time="2022-10-06 13:38:30Z" duration="0.033246" asserts="0">
+          <properties />
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

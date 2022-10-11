@@ -38,6 +38,10 @@ jobs:
         uses: kuler90/setup-unity@v1
         with:
           project-path: ${{ github.workspace }}\${{ env.SOLUTION_NAME }}
+      - name: Run Unit Tests
+        shell: cmd
+        run: |
+          "${{ env.UNITY_PATH }}" -runTests -batchmode -projectPath ${{ github.workspace }}${{ env.PROJECT_FOLDER }} -testResults ${{ github.workspace }}${{ env.PROJECT_FOLDER }}/results.xls
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1.0.2
       - name: Cache SonarCloud packages

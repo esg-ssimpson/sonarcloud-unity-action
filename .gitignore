@@ -3,6 +3,8 @@
 /client/[Ll]ibrary/
 /client/[Oo]bj/
 /client/[Bb]uild/
+/client/[Ll]ogs/
+/client/[Pp]ackages/
 /client/Assets/StreamingAssets
 /client/Assets/StreamingAssets.meta
 /client/Assets/projectprefs.json
