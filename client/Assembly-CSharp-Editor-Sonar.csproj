@@ -292,22 +292,22 @@
  <HintPath>/Applications/Unity/Hub/Editor/2020.3.34f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Plastic.Newtonsoft.Json">
-			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies//Unity.Plastic.Newtonsoft.Json.dll</HintPath>
+			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies/Unity.Plastic.Newtonsoft.Json.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Plastic.Antlr3.Runtime">
-			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies//Unity.Plastic.Antlr3.Runtime.dll</HintPath>
+			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies/Unity.Plastic.Antlr3.Runtime.dll</HintPath>
  </Reference>
  <Reference Include="log4netPlastic">
-			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies//log4netPlastic.dll</HintPath>
- </Reference>
- <Reference Include="unityplastic">
-			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies//unityplastic.dll</HintPath>
+			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies/log4netPlastic.dll</HintPath>
  </Reference>
  <Reference Include="ReportGeneratorMerged">
-			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies//ReportGeneratorMerged.dll</HintPath>
+			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies/ReportGeneratorMerged.dll</HintPath>
+ </Reference>
+ <Reference Include="unityplastic">
+			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies/unityplastic.dll</HintPath>
  </Reference>
  <Reference Include="nunit.framework">
-			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies//nunit.framework.dll</HintPath>
+			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies/nunit.framework.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>/Applications/Unity/Hub/Editor/2020.3.34f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
@@ -664,49 +664,49 @@
 			<HintPath>C:/Program Files/Unity/Hub/Editor/2020.3.34f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/netstandard.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.TestRunner">
-			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies//UnityEngine.TestRunner.dll</HintPath>
+			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies/UnityEngine.TestRunner.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.TestRunner">
-			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies//UnityEditor.TestRunner.dll</HintPath>
+			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies/UnityEditor.TestRunner.dll</HintPath>
  </Reference>
  <Reference Include="Unity.VSCode.Editor">
-			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies//Unity.VSCode.Editor.dll</HintPath>
+			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies/Unity.VSCode.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
-			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies//Unity.TextMeshPro.Editor.dll</HintPath>
+			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.VisualStudio.Editor">
-			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies//Unity.VisualStudio.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Unity.Timeline.Editor">
-			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies//Unity.Timeline.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Unity.Timeline">
-			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies//Unity.Timeline.dll</HintPath>
- </Reference>
- <Reference Include="Unity.TextMeshPro">
-			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies//Unity.TextMeshPro.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.UI">
-			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies//UnityEditor.UI.dll</HintPath>
- </Reference>
- <Reference Include="Unity.PlasticSCM.Editor">
-			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies//Unity.PlasticSCM.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Unity.Rider.Editor">
-			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies//Unity.Rider.Editor.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.UI">
-			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies//UnityEngine.UI.dll</HintPath>
+			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Model">
-			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies//Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.dll</HintPath>
+			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies/Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Timeline.Editor">
+			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies/Unity.Timeline.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Timeline">
+			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies/Unity.Timeline.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.TextMeshPro">
+			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
-			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies//Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>
+			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies/Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.UI">
+			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies/UnityEditor.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.PlasticSCM.Editor">
+			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies/Unity.PlasticSCM.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Rider.Editor">
+			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies/Unity.Rider.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TestTools.CodeCoverage.Editor">
-			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies//Unity.TestTools.CodeCoverage.Editor.dll</HintPath>
+			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies/Unity.TestTools.CodeCoverage.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.UI">
+			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies/UnityEngine.UI.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

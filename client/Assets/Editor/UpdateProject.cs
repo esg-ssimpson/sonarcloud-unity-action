@@ -2,6 +2,8 @@
 using System.IO;
 using System.Text;
 using UnityEditor;
+using UnityEditor.TestTools.CodeCoverage; 
+using UnityEditor.TestTools.TestRunner.Api;
 using UnityEngine;
 
 namespace EastSideGames.ThirdParty.SonarCloud
@@ -20,7 +22,88 @@ namespace EastSideGames.ThirdParty.SonarCloud
 
         private static void OnProjectChanged()
         {
+            CodeCoverage.StartRecording();
+            var testRunnerApi = ScriptableObject.CreateInstance<TestRunnerApi>();
+            var filter = new Filter()
+            {
+                testMode = TestMode.EditMode
+            };
+
+            var executionSettings = new ExecutionSettings()
+            {
+                filters = new [] { filter },
+                runSynchronously = true
+            };
+
+            try
+            {
+                testRunnerApi.Execute(executionSettings);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+         
+            
+            CodeCoverage.StopRecording();
+            
             DirectoryInfo directoryInfo = new DirectoryInfo(".");
+            UpdateSolution(directoryInfo);
+            UpdateCoverage(directoryInfo);
+        }
+
+        private static void UpdateCoverage(DirectoryInfo baseDirectory)
+        {
+            DirectoryInfo directoryInfo = new DirectoryInfo("./CodeCoverage/client-opencov/Recording");
+
+            if (directoryInfo.Exists)
+            {
+                Directory.CreateDirectory("SonarCoverage");
+                
+                var filesInfo = directoryInfo.GetFiles();
+                foreach (var fileInfo in filesInfo)
+                {
+                    UpdateCoverageReport(fileInfo, baseDirectory.Name);
+                }
+            }
+        }
+
+        private static void UpdateCoverageReport(FileInfo fileInfo, string baseDirectory)
+        {
+            string fileName = fileInfo.Name;
+            string readLine;
+            StreamReader streamReader = fileInfo.OpenText();
+            StringBuilder outputString = new StringBuilder();
+
+            do
+            {
+                readLine = streamReader.ReadLine();
+                if (readLine != null)
+                {
+                    if (readLine.Contains("<File "))
+                    {
+                        int pathIndex = readLine.IndexOf(@"fullPath=""", StringComparison.CurrentCulture) +
+                                        @"fullPath=""".Length; 
+                        int targetIndex = readLine.IndexOf($"/{baseDirectory}/", StringComparison.CurrentCulture);
+                        string fileStart = readLine.Substring(0, pathIndex);
+                        string fileEnd = readLine.Substring(targetIndex, readLine.Length - targetIndex);
+                        outputString.AppendLine(fileStart + DockerPath + fileEnd);
+                    }
+                    else
+                    {
+                        outputString.AppendLine(readLine);
+                    }
+                }
+            } while (readLine != null);
+            
+            streamReader.Close();
+            streamReader.Dispose();
+            
+            File.WriteAllText($"./SonarCoverage/{fileName}",outputString.ToString());
+        }
+
+        private static void UpdateSolution(DirectoryInfo directoryInfo)
+        {
             var filesInfo = directoryInfo.GetFiles();
 
             Directory.CreateDirectory("SonarAssemblies");
@@ -43,7 +126,6 @@ namespace EastSideGames.ThirdParty.SonarCloud
         private static void UpdateProjectFile(FileInfo fileInfo, string directoryName)
         {
             string fileName = fileInfo.Name;
-            string directoryPath = $"/{directoryName}/";
             string readLine;
             
             StreamReader streamReader = fileInfo.OpenText();
@@ -72,7 +154,7 @@ namespace EastSideGames.ThirdParty.SonarCloud
                     }
                     else if (readLine.Contains("<HintPath>"))
                     {
-                        outputString.AppendLine(FixHintPath(readLine, directoryPath));
+                        outputString.AppendLine(FixHintPath(readLine, $"/{directoryName}/"));
                     }
                     else if (readLine.Contains(".csproj"))
                     {
@@ -134,7 +216,7 @@ namespace EastSideGames.ThirdParty.SonarCloud
                     fileIndex = filePath.LastIndexOf("/", StringComparison.CurrentCulture);
                     string fileName = filePath.Substring(fileIndex, filePath.Length - fileIndex);
                     File.Copy(filePath, "SonarAssemblies" + fileName, true);
-                    readLine = directoryPath + "SonarAssemblies/" + fileName + "</HintPath>";
+                    readLine = directoryPath + "SonarAssemblies" + fileName + "</HintPath>";
                 }
                 pathIndex = readLine.IndexOf(directoryPath, StringComparison.CurrentCulture) + directoryPath.Length;
                 pathString = readLine.Substring(pathIndex, readLine.Length - pathIndex);

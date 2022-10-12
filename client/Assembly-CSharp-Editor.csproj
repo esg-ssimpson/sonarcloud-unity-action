@@ -297,11 +297,11 @@
  <Reference Include="log4netPlastic">
  <HintPath>/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Library/PackageCache/com.unity.collab-proxy@1.15.16/Lib/Editor/PlasticSCM/log4netPlastic.dll</HintPath>
  </Reference>
- <Reference Include="unityplastic">
- <HintPath>/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Library/PackageCache/com.unity.collab-proxy@1.15.16/Lib/Editor/PlasticSCM/unityplastic.dll</HintPath>
- </Reference>
  <Reference Include="ReportGeneratorMerged">
  <HintPath>/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Library/PackageCache/com.unity.testtools.codecoverage@1.2.0/lib/ReportGenerator/ReportGeneratorMerged.dll</HintPath>
+ </Reference>
+ <Reference Include="unityplastic">
+ <HintPath>/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Library/PackageCache/com.unity.collab-proxy@1.15.16/Lib/Editor/PlasticSCM/unityplastic.dll</HintPath>
  </Reference>
  <Reference Include="nunit.framework">
  <HintPath>/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Library/PackageCache/com.unity.ext.nunit@1.0.6/net35/unity-custom/nunit.framework.dll</HintPath>
@@ -675,6 +675,9 @@
  <Reference Include="Unity.VisualStudio.Editor">
  <HintPath>/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
  </Reference>
+ <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Model">
+ <HintPath>/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Library/ScriptAssemblies/Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.dll</HintPath>
+ </Reference>
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
@@ -683,6 +686,9 @@
  </Reference>
  <Reference Include="Unity.TextMeshPro">
  <HintPath>/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
+ <HintPath>/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Library/ScriptAssemblies/Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.UI">
  <HintPath>/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
@@ -693,17 +699,11 @@
  <Reference Include="Unity.Rider.Editor">
  <HintPath>/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
  </Reference>
- <Reference Include="UnityEngine.UI">
- <HintPath>/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
- </Reference>
- <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Model">
- <HintPath>/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Library/ScriptAssemblies/Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.dll</HintPath>
- </Reference>
- <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
- <HintPath>/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Library/ScriptAssemblies/Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>
- </Reference>
  <Reference Include="Unity.TestTools.CodeCoverage.Editor">
  <HintPath>/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Library/ScriptAssemblies/Unity.TestTools.CodeCoverage.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.UI">
+ <HintPath>/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
