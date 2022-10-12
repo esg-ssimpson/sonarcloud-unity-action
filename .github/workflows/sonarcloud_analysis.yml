@@ -35,15 +35,7 @@ jobs:
         with:
           script: |
             core.setFailed('Solution file is missing!')
-      - name: Cache Unity
-        id: cache-unity
-        uses: actions/cache@v1
-        with:
-          path: "C:/Program Files/Unity"
-          key: unity-${{ env.UNITY_VERSION }}
-          restore-keys: unity-${{ env.UNITY_VERSION }}
       - name: Setup Unity
-        if: steps.cache-unity.outputs.cache-hit != 'true'
         uses: kuler90/setup-unity@v1
         with:
           project-path: ${{ github.workspace }}\${{ env.SOLUTION_NAME }}
