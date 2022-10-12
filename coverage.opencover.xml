@@ -7,8 +7,8 @@
       <ModuleTime>0001-01-01T00:00:00</ModuleTime>
       <ModuleName>Assembly-CSharp</ModuleName>
       <Files>
-        <File uid="1" fullPath="/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Assets/Core/SubmoduleTest.cs" />
-        <File uid="2" fullPath="/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Assets/Scripts/HelloWorld.cs" />
+        <File uid="1" fullPath="D:\a\sonarcloud-unity-action\sonarcloud-unity-action\client/Assets/Core/SubmoduleTest.cs" />
+        <File uid="2" fullPath="D:\a\sonarcloud-unity-action\sonarcloud-unity-action\client/Assets/Scripts/HelloWorld.cs" />
       </Files>
       <Classes>
         <Class>
@@ -36,8 +36,8 @@
       <ModuleTime>0001-01-01T00:00:00</ModuleTime>
       <ModuleName>Assembly-CSharp-Editor</ModuleName>
       <Files>
-        <File uid="3" fullPath="/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Assets/Editor/Tests/NewTestScript.cs" />
-        <File uid="4" fullPath="/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Assets/Editor/UpdateProject.cs" />
+        <File uid="3" fullPath="D:\a\sonarcloud-unity-action\sonarcloud-unity-action\client/Assets/Editor/Tests/NewTestScript.cs" />
+        <File uid="4" fullPath="D:\a\sonarcloud-unity-action\sonarcloud-unity-action\client/Assets/Editor/UpdateProject.cs" />
       </Files>
       <Classes>
         <Class>
