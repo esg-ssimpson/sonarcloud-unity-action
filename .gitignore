@@ -9,6 +9,7 @@
 /client/Assets/StreamingAssets.meta
 /client/Assets/projectprefs.json
 /client/Assets/projectprefs.json.meta
+/client/CodeCoverage/
 
 /client/Assets/Editor/Plot Point Import/Imported Plot Points*
 /client/Assets/Editor/CSV Importer/CSV Files*

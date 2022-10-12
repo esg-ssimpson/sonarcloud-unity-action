@@ -303,6 +303,9 @@
  <Reference Include="unityplastic">
 			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies//unityplastic.dll</HintPath>
  </Reference>
+ <Reference Include="ReportGeneratorMerged">
+			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies//ReportGeneratorMerged.dll</HintPath>
+ </Reference>
  <Reference Include="nunit.framework">
 			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies//nunit.framework.dll</HintPath>
  </Reference>
@@ -695,6 +698,15 @@
  </Reference>
  <Reference Include="UnityEngine.UI">
 			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies//UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Model">
+			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies//Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
+			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies//Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.TestTools.CodeCoverage.Editor">
+			<HintPath>D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/SonarAssemblies//Unity.TestTools.CodeCoverage.Editor.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

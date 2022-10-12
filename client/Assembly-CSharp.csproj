@@ -276,6 +276,9 @@
  <Reference Include="UnityEditor.UnityConnectModule">
  <HintPath>/Applications/Unity/Hub/Editor/2020.3.34f1/Unity.app/Contents/Managed/UnityEngine/UnityEditor.UnityConnectModule.dll</HintPath>
  </Reference>
+ <Reference Include="ReportGeneratorMerged">
+ <HintPath>/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Library/PackageCache/com.unity.testtools.codecoverage@1.2.0/lib/ReportGenerator/ReportGeneratorMerged.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>/Applications/Unity/Hub/Editor/2020.3.34f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
  </Reference>
@@ -656,6 +659,15 @@
  </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Model">
+ <HintPath>/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Library/ScriptAssemblies/Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
+ <HintPath>/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Library/ScriptAssemblies/Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.TestTools.CodeCoverage.Editor">
+ <HintPath>/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Library/ScriptAssemblies/Unity.TestTools.CodeCoverage.Editor.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

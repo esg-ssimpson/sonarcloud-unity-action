@@ -289,16 +289,19 @@
  <HintPath>/Applications/Unity/Hub/Editor/2020.3.34f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Plastic.Newtonsoft.Json">
- <HintPath>/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Library/PackageCache/com.unity.collab-proxy@1.17.2/Lib/Editor/PlasticSCM/Unity.Plastic.Newtonsoft.Json.dll</HintPath>
+ <HintPath>/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Library/PackageCache/com.unity.collab-proxy@1.15.16/Lib/Editor/PlasticSCM/Unity.Plastic.Newtonsoft.Json.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Plastic.Antlr3.Runtime">
- <HintPath>/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Library/PackageCache/com.unity.collab-proxy@1.17.2/Lib/Editor/PlasticSCM/Unity.Plastic.Antlr3.Runtime.dll</HintPath>
+ <HintPath>/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Library/PackageCache/com.unity.collab-proxy@1.15.16/Lib/Editor/PlasticSCM/Unity.Plastic.Antlr3.Runtime.dll</HintPath>
  </Reference>
  <Reference Include="log4netPlastic">
- <HintPath>/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Library/PackageCache/com.unity.collab-proxy@1.17.2/Lib/Editor/PlasticSCM/log4netPlastic.dll</HintPath>
+ <HintPath>/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Library/PackageCache/com.unity.collab-proxy@1.15.16/Lib/Editor/PlasticSCM/log4netPlastic.dll</HintPath>
  </Reference>
  <Reference Include="unityplastic">
- <HintPath>/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Library/PackageCache/com.unity.collab-proxy@1.17.2/Lib/Editor/PlasticSCM/unityplastic.dll</HintPath>
+ <HintPath>/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Library/PackageCache/com.unity.collab-proxy@1.15.16/Lib/Editor/PlasticSCM/unityplastic.dll</HintPath>
+ </Reference>
+ <Reference Include="ReportGeneratorMerged">
+ <HintPath>/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Library/PackageCache/com.unity.testtools.codecoverage@1.2.0/lib/ReportGenerator/ReportGeneratorMerged.dll</HintPath>
  </Reference>
  <Reference Include="nunit.framework">
  <HintPath>/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Library/PackageCache/com.unity.ext.nunit@1.0.6/net35/unity-custom/nunit.framework.dll</HintPath>
@@ -692,6 +695,15 @@
  </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Model">
+ <HintPath>/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Library/ScriptAssemblies/Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
+ <HintPath>/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Library/ScriptAssemblies/Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.TestTools.CodeCoverage.Editor">
+ <HintPath>/Users/ssimpsonesg/Projects/sonarcloud-unity-action/client/Library/ScriptAssemblies/Unity.TestTools.CodeCoverage.Editor.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
