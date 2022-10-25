@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageSession xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="0.0.0.0">
+  <Summary numSequencePoints="17" visitedSequencePoints="7" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="41.18" branchCoverage="0.0" maxCyclomaticComplexity="0" minCyclomaticComplexity="0" maxCrapScore="0" minCrapScore="0" visitedClasses="1" numClasses="1" visitedMethods="1" numMethods="1" />
+  <Modules>
+    <Module>
+      <Summary numSequencePoints="17" visitedSequencePoints="7" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="41.18" branchCoverage="0.0" maxCyclomaticComplexity="0" minCyclomaticComplexity="0" maxCrapScore="0" minCrapScore="0" visitedClasses="1" numClasses="1" visitedMethods="1" numMethods="1" />
+      <ModuleTime>0001-01-01T00:00:00</ModuleTime>
+      <ModuleName>Assembly-CSharp-Editor</ModuleName>
+      <Files>
+        <File uid="3" fullPath="D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/Assets/Editor/Tests/NewTestScript.cs" />
+        <File uid="4" fullPath="D:/a/sonarcloud-unity-action/sonarcloud-unity-action/client/Assets/Editor/UpdateProject.cs" />
+      </Files>
+      <Classes>
+        <Class>
+          <Summary numSequencePoints="17" visitedSequencePoints="7" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="41.18" branchCoverage="0.0" maxCyclomaticComplexity="0" minCyclomaticComplexity="0" maxCrapScore="0" minCrapScore="0" visitedClasses="1" numClasses="1" visitedMethods="1" numMethods="1" />
+          <FullName>EastSideGames.ThirdParty.SonarCloud.UpdateProject</FullName>
+          <Methods>
+            <Method visited="true" cyclomaticComplexity="0" nPathComplexity="0" sequenceCoverage="41.18" branchCoverage="0" crapScore="0" isConstructor="false" isStatic="true" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="17" visitedSequencePoints="7" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="41.18" branchCoverage="0" maxCyclomaticComplexity="0" minCyclomaticComplexity="0" maxCrapScore="0" minCrapScore="0" visitedClasses="0" numClasses="0" visitedMethods="1" numMethods="1" />
+              <MetadataToken>100663300</MetadataToken>
+              <Name>static System.Void EastSideGames.ThirdParty.SonarCloud.UpdateProject::OnProjectChanged()</Name>
+              <FileRef uid="4" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="215" ordinal="0" offset="0" sl="24" sc="9" el="24" ec="9" bec="0" bev="0" fileid="4" />
+                <SequencePoint vc="0" uspid="216" ordinal="0" offset="1" sl="25" sc="13" el="25" ec="13" bec="0" bev="0" fileid="4" />
+                <SequencePoint vc="1" uspid="217" ordinal="0" offset="7" sl="26" sc="13" el="26" ec="13" bec="0" bev="0" fileid="4" />
+                <SequencePoint vc="1" uspid="218" ordinal="0" offset="13" sl="27" sc="13" el="27" ec="13" bec="0" bev="0" fileid="4" />
+                <SequencePoint vc="1" uspid="219" ordinal="0" offset="26" sl="32" sc="13" el="32" ec="13" bec="0" bev="0" fileid="4" />
+                <SequencePoint vc="1" uspid="220" ordinal="0" offset="66" sl="39" sc="13" el="39" ec="13" bec="0" bev="0" fileid="4" />
+                <SequencePoint vc="1" uspid="221" ordinal="0" offset="67" sl="40" sc="17" el="40" ec="17" bec="0" bev="0" fileid="4" />
+                <SequencePoint vc="1" uspid="222" ordinal="0" offset="75" sl="41" sc="13" el="41" ec="13" bec="0" bev="0" fileid="4" />
+                <SequencePoint vc="0" uspid="223" ordinal="0" offset="78" sl="42" sc="13" el="42" ec="13" bec="0" bev="0" fileid="4" />
+                <SequencePoint vc="0" uspid="224" ordinal="0" offset="80" sl="43" sc="13" el="43" ec="13" bec="0" bev="0" fileid="4" />
+                <SequencePoint vc="0" uspid="225" ordinal="0" offset="81" sl="44" sc="17" el="44" ec="17" bec="0" bev="0" fileid="4" />
+                <SequencePoint vc="0" uspid="226" ordinal="0" offset="89" sl="45" sc="13" el="45" ec="13" bec="0" bev="0" fileid="4" />
+                <SequencePoint vc="1" uspid="227" ordinal="0" offset="92" sl="48" sc="13" el="48" ec="13" bec="0" bev="0" fileid="4" />
+                <SequencePoint vc="0" uspid="228" ordinal="0" offset="98" sl="50" sc="13" el="50" ec="13" bec="0" bev="0" fileid="4" />
+                <SequencePoint vc="0" uspid="229" ordinal="0" offset="109" sl="51" sc="13" el="51" ec="13" bec="0" bev="0" fileid="4" />
+                <SequencePoint vc="0" uspid="230" ordinal="0" offset="116" sl="52" sc="13" el="52" ec="13" bec="0" bev="0" fileid="4" />
+                <SequencePoint vc="0" uspid="231" ordinal="0" offset="123" sl="53" sc="9" el="53" ec="9" bec="0" bev="0" fileid="4" />
+              </SequencePoints>
+              <BranchPoints />
+            </Method>
+          </Methods>
+        </Class>
+      </Classes>
+    </Module>
+  </Modules>
+</CoverageSession>
